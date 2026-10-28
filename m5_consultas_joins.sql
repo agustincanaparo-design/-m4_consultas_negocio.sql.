@@ -6,34 +6,24 @@ SELECT * FROM dbo.Ventas
 -- Consulta 1: Vista base del proyecto (INNER JOIN)
 --Propósito:Este apartado busca crear tablas de facil lectura para un rápido análisis de situación por parte de la mesa directiva.
 
---Tabla de relación clientes
+--Tabla de relación 
 SELECT 
+fecha_venta,
 nombre,
 email,
 ciudad,
+nombre_producto,
+nombre_categoria,
 cantidad,
 precio_unitario,
-(precio_unitario * cantidad) AS Total_venta,
-fecha_venta
+(precio_unitario * cantidad) AS Total_venta
 FROM Ventas  V
-INNER JOIN Clientes C ON V.id_cliente = C.id_cliente;
-
---Tabla de relación productos
-SELECT 
-nombre_producto,
-id_categoria,
-precio,
-stock,
-id_venta,
-cantidad,
-fecha_venta
-FROM Ventas  V
-INNER JOIN Productos P ON V.id_producto = P.id_producto;
-
+INNER JOIN Clientes C ON V.id_cliente = C.id_cliente
+INNER JOIN Productos P ON V.id_producto = P.id_producto
+INNER JOIN Categorias CT ON P.id_categoria= CT.id_categoria
 
 --HALLAZGO: 
---La tabla clientes permite ver rápidamente las ventas realizadas con su información, a la par que los datos del cliente que la realizó. 
---Por su lado, la tabla productos da información que productos y cuanto se vendió, esto srive para una rápida actualizacón de stock.
+--La tabla permite ver rápidamente las ventas realizadas con su información, a la par que los datos del cliente que la realizó y información de los productos y cuanto se vendió, esto puede ser útil para una rápida actualizacón de stock.  
 
 -- Consulta 2: Clientes sin ventas (LEFT JOIN) 
 --Propósito:La tabla busca a los clientes que se registraron pero que aún no han realizado una compra.
@@ -88,5 +78,3 @@ GROUP BY canal;
 --HALLAZGO:
 --El canal de ventas Online registro una menor facturacón total en los periodos analizados.
 
-
---Buenas, disculpa pero me parece que en el anterior intento me había olvidado de cargar el code. Por suerte dejé un archivo con el mismo. Estoy atento a la nueva correción. Gracias!
