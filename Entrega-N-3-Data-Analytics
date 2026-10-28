@@ -1,4 +1,4 @@
-CREATE DATABASE Ventas_Tech_DB
+CREATE DATABASE Ventas_Tech_DB;
 
 
 -- Sección N°1 DROP TABLES
